@@ -1,7 +1,7 @@
 #ch 4.2.1 main.py
 import sys
 from PyQt5.QtWidgets import ( QApplication, QWidget, QPushButton, QVBoxLayout, 
-                             QMessageBox, QPlainTextEdit)   
+                             QMessageBox, QPlainTextEdit, QHBoxLayout)   
 from PyQt5.QtGui import QIcon
 
 class Calculator(QWidget):
@@ -13,14 +13,23 @@ class Calculator(QWidget):
         self.te1 = QPlainTextEdit(self)
         self.te1.setReadOnly(True)
 
+        self.button2 = QPushButton('Clear', self)
+        self.button2.clicked.connect(self.clearMessage)
+
         self.button = QPushButton('Message', self)
         self.button.clicked.connect(self.activateMessage)
+
+        hbox=QHBoxLayout()
+        hbox.addStretch(1)
+        hbox.addWidget(self.button)
+        hbox.addWidget(self.button2)        
 
         vbox=QVBoxLayout()
         vbox.addWidget(self.te1)    
         vbox.addStretch(1)
-        vbox.addWidget(self.button)
+        vbox.addLayout(hbox)
         vbox.addStretch(1)
+
 
         self.setLayout(vbox)
 
@@ -32,6 +41,9 @@ class Calculator(QWidget):
     def activateMessage(self):
         # QMessageBox.information(self, 'Information', 'Button Clicked!')
         self.te1.appendPlainText('Button Clicked!') 
+
+    def clearMessage(self):
+        self.te1.clear()    
 
 
 if __name__ == '__main__':

@@ -1,54 +1,18 @@
 #ch 4.2.1 main.py
+
 import sys
-from PyQt5.QtWidgets import ( QApplication, QWidget, QPushButton, QVBoxLayout, 
-                             QMessageBox, QPlainTextEdit, QHBoxLayout)   
-from PyQt5.QtGui import QIcon
+from ui import View
+from ctrl import Control
+from PyQt5.QtWidgets import QApplication
 
-class Calculator(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.initUI()
-
-    def initUI(self):
-        self.te1 = QPlainTextEdit(self)
-        self.te1.setReadOnly(True)
-
-        self.button2 = QPushButton('Clear', self)
-        self.button2.clicked.connect(self.clearMessage)
-
-        self.button = QPushButton('Message', self)
-        self.button.clicked.connect(self.activateMessage)
-
-        hbox=QHBoxLayout()
-        hbox.addStretch(1)
-        hbox.addWidget(self.button)
-        hbox.addWidget(self.button2)        
-
-        vbox=QVBoxLayout()
-        vbox.addWidget(self.te1)    
-        vbox.addStretch(1)
-        vbox.addLayout(hbox)
-        vbox.addStretch(1)
-
-
-        self.setLayout(vbox)
-
-        # self.setGeometry(300, 300, 300, 220)
-        self.setWindowTitle('Calculator')
-        self.resize(256, 256)
-        self.show()
-
-    def activateMessage(self):
-        # QMessageBox.information(self, 'Information', 'Button Clicked!')
-        self.te1.appendPlainText('Button Clicked!') 
-
-    def clearMessage(self):
-        self.te1.clear()    
-
+def main():
+    calc = QApplication(sys.argv)
+    app = QApplication(sys.argv)
+    view = View()
+    Control(view=view)
+    sys.exit(app.exec_())    
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = Calculator()
-    sys.exit(app.exec_())
+    main()
 
         

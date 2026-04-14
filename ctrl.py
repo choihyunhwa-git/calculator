@@ -6,8 +6,11 @@ class Control:
         self.view = view
         self.connectSignals()
 
+    def calculate(self):
+        pass
+
     def connectSignals(self):
-        self.view.button.clicked.connect(self.view.activateMessage)
+        self.view.button.clicked.connect(self.calculate)
         self.view.button2.clicked.connect(self.view.clearMessage)
 
         
